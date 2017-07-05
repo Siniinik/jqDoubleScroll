@@ -1,3 +1,14 @@
+$(document).ready(function() {
+  $('.double-scroll').doubleScroll();
+  $('#sample2').doubleScroll({
+    resetOnWindowResize: true
+  });
+  $('#sample3').doubleScroll({
+    resetOnWindowResize: true,
+    fixedOnWindow: true
+  });
+});
+
 /*
  * @name DoubleScroll
  * @desc displays scroll bar on top and on the bottom of the div
@@ -8,7 +19,7 @@
  * @version 0.5 (11-11-2015)
  *
  * Dual licensed under the MIT and GPL licenses:
- * http://www.opensource.org/licenses/mit-license.php
+ * https://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
  * 
  * Usage:
@@ -31,7 +42,8 @@
 			},
 			onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
 			resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
-			timeToWaitForResize: 30 // wait for the last update event (usefull when browser fire resize event constantly during ressing)
+			timeToWaitForResize: 30, // wait for the last update event (usefull when browser fire resize event constantly during ressing)
+      fixedOnWindow: false //фиксация при прокрутки большого содержимого
 		};
 	
 		$.extend(true, options, userOptions);
@@ -116,6 +128,31 @@
 					clearTimeout(id);
 					id = setTimeout(handler, options.timeToWaitForResize);
 				});
+        
+         if (options.fixedOnWindow) {
+                    var start=true;
+                      function fix() {
+                        $(".doubleScroll-scroll-wrapper").css({
+                            "position": "fixed",
+                            "top": 0,
+                            "z-index": 100
+                        });
+                        start = false;
+                    }
+                    $(window).bind('scroll', function() {
+                        var t=$self.offset().top;
+                        if ($(this).scrollTop() > t) {
+                            if(start) setTimeout(fix(), 1500);
+                                else fix();
+                        } else {
+                            $(".doubleScroll-scroll-wrapper").css({
+                                "position":"relative"
+                            });
+                        }
+                    });
+
+
+            }
 
 			}
 
