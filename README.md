@@ -28,7 +28,8 @@ You can configure the double scroll with the following options :
 		'overflow-y': 'hidden'
 	},
 	onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
-	resetOnWindowResize: false // recompute the top ScrollBar requirements when the window is resized
+	resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
+	fixedOnWindow: false //фиксация при прокрутки большого содержимого
 }
 ```
 
