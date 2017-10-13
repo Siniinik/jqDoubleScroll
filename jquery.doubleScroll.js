@@ -128,22 +128,25 @@
          if (options.fixedOnWindow) {
                     var start=true;
                       function fix() {
-                        $(".doubleScroll-scroll-wrapper").css({
-                            "position": "fixed",
-                            "top": 0,
-                            "z-index": 100
-                        });
+                          $(".doubleScroll-scroll-wrapper")
+                              .css({
+                                  "position": "fixed",
+                                  "top": 0,
+                                  "z-index": 100
+                              }).addClass("doubleScroll-fixed");
                         start = false;
                     }
                     $(window).bind('scroll', function() {
-                        var t=$self.offset().top;
+                        var t = $self.offset().top;
                         if ($(this).scrollTop() > t) {
                             if(start) setTimeout(fix(), 1500);
                                 else fix();
                         } else {
-                            $(".doubleScroll-scroll-wrapper").css({
-                                "position":"relative"
-                            });
+                            $(".doubleScroll-scroll-wrapper")
+                                .css({
+                                    "position": "relative"
+                                })
+                                .removeClass("doubleScroll-fixed");
                         }
                     });
 
