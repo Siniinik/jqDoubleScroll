@@ -1,14 +1,3 @@
-$(document).ready(function() {
-  $('.double-scroll').doubleScroll();
-  $('#sample2').doubleScroll({
-    resetOnWindowResize: true
-  });
-  $('#sample3').doubleScroll({
-    resetOnWindowResize: true,
-    fixedOnWindow: true
-  });
-});
-
 /*
  * @name DoubleScroll
  * @desc displays scroll bar on top and on the bottom of the div
@@ -16,7 +5,8 @@ $(document).ready(function() {
  *
  * @author Pawel Suwala - http://suwala.eu/
  * @author Antoine Vianey - http://www.astek.fr/
- * @version 0.5 (11-11-2015)
+ * @author Andrey Postnov - https://github.com/apostnov
+ * @version 0.5.1 (2017-10-13)
  *
  * Dual licensed under the MIT and GPL licenses:
  * https://www.opensource.org/licenses/mit-license.php
@@ -42,8 +32,9 @@ $(document).ready(function() {
 			},
 			onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
 			resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
-			timeToWaitForResize: 30, // wait for the last update event (usefull when browser fire resize event constantly during ressing)
-      fixedOnWindow: false //фиксация при прокрутки большого содержимого
+            timeToWaitForResize: 30, // wait for the last update event (usefull when browser fire resize event constantly during ressing)
+			css: null, // custom scroll wrapper css 
+            fixedOnWindow: false // fixed on window top (reqires "resetOnWindowResize" == true)
 		};
 	
 		$.extend(true, options, userOptions);
@@ -72,7 +63,12 @@ $(document).ready(function() {
 				
 				// creating the scrollbar
 				// added before in the DOM
-				$topScrollBar = $(options.topScrollBarMarkup);
+                $topScrollBar = $(options.topScrollBarMarkup);
+
+                if (options.css) {
+                    $topScrollBar.addClass(options.css);
+                }
+
 				$self.before($topScrollBar);
 
 				// apply the css
