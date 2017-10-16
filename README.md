@@ -29,7 +29,8 @@ You can configure the double scroll with the following options :
 	},
 	onlyIfScroll: true, // top scrollbar is not shown if the bottom one is not present
 	resetOnWindowResize: false, // recompute the top ScrollBar requirements when the window is resized
-	fixedOnWindow: false //фиксация при прокрутки большого содержимого
+	css: null, // custom scroll wrapper css 
+	fixedOnWindow: false // fixed on window top (reqires "resetOnWindowResize" == true)
 }
 ```
 
@@ -54,6 +55,12 @@ If **true**, will display the top scrollbar only if the content is scrollable...
 
 If **true**, will attach an event to regenerate the top scrollbar when the window is resized.  
 Use it when the scrollable element has a width which is relative to the window width.
+
+###### css
+Custom css class name to add to scroll wrapper
+
+###### fixedOnWindow
+If **true**, will stick scroll wrapper on top of window (Default **false**, reqires "resetOnWindowResize" == **true**)
 
 ## Licence
 
